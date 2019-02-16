@@ -38,6 +38,10 @@ android {
     }
 }
 
+androidExtensions {
+    experimental = true
+}
+
 static def buildTime() {
     def df = new SimpleDateFormat("yyyy-MM-dd")
     df.setTimeZone(TimeZone.getTimeZone("UTC"))
@@ -45,6 +49,7 @@ static def buildTime() {
 }
 
 dependencies {
+    def lifecycle_version = '2.0.0'
     def room_version = '2.1.0-alpha04'
     def koin_version = '1.0.2'
     def work_manager_version = '1.0.0-beta05'
@@ -52,12 +57,13 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // core
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
-    implementation 'androidx.core:core-ktx:1.1.0-alpha04'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    implementation 'com.google.android.material:material:1.1.0-alpha03'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation "androidx.appcompat:appcompat:1.1.0-alpha02"
+    implementation "androidx.core:core-ktx:1.1.0-alpha04"
+    implementation "androidx.constraintlayout:constraintlayout:2.0.0-alpha3"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
+    implementation "com.google.android.material:material:1.1.0-alpha03"
+    implementation "androidx.recyclerview:recyclerview:1.0.0"
 
     // db
     implementation "androidx.room:room-runtime:$room_version"
@@ -65,8 +71,8 @@ dependencies {
     implementation "androidx.room:room-rxjava2:$room_version"
 
     // rx
-    implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation "io.reactivex.rxjava2:rxkotlin:2.3.0"
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.0"
 
     // di
     implementation "org.koin:koin-androidx-scope:$koin_version"
@@ -77,7 +83,7 @@ dependencies {
     implementation "android.arch.work:work-rxjava2:$work_manager_version"
 
     // test
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.2-alpha01'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.2-alpha01'
+    testImplementation "junit:junit:4.12"
+    androidTestImplementation "androidx.test:runner:1.1.2-alpha01"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.1.2-alpha01"
 }

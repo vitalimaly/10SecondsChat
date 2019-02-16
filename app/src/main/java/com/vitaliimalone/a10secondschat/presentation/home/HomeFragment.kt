@@ -6,23 +6,43 @@ import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.vitaliimalone.a10secondschat.R
 import com.vitaliimalone.a10secondschat.databinding.CreateNewChatDialogBinding
 import com.vitaliimalone.a10secondschat.databinding.HomeFragmentBinding
 import com.vitaliimalone.a10secondschat.presentation.base.BaseFragment
+import com.vitaliimalone.a10secondschat.presentation.home.common.ChatAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
+    companion object {
+        fun newInstance() = HomeFragment()
+    }
+
     override val viewModel: HomeViewModel by viewModel()
     private var dialog: AlertDialog? = null
+    private val chatAdapter by lazy { ChatAdapter(viewModel) }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        binding.viewModel = viewModel
-        viewModel.showDialog.observe(this, Observer {
-            if (it) showCreateNewChatDialog()
-            else dialog?.dismiss()
-        })
+        binding.apply {
+            viewModel = this@HomeFragment.viewModel
+            chatRecyclerView.adapter = chatAdapter
+            chatRecyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+        }
+        setupObservers()
+    }
+
+    private fun setupObservers() {
+        viewModel.apply {
+            showDialog.observe(this@HomeFragment, Observer {
+                if (it) showCreateNewChatDialog()
+                else dialog?.dismiss()
+            })
+            allChats.observe(this@HomeFragment, Observer {
+                chatAdapter.list = it
+            })
+        }
     }
 
     private fun showCreateNewChatDialog() {
@@ -34,9 +54,5 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
                 .create()
         dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
         dialog?.show()
-    }
-
-    companion object {
-        fun newInstance() = HomeFragment()
     }
 }

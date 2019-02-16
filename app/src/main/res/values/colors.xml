@@ -7,4 +7,5 @@
     <color name="text_color_secondary">#6B6B6B</color>
     <color name="negative_button_red">#EF5350</color>
     <color name="positive_button_green">#66BB6A</color>
+    <color name="divider_color">#80FFFFFF</color>
 </resources>

@@ -17,11 +17,11 @@ import org.koin.dsl.module.module
 val presentationModule = module {
     // https://github.com/InsertKoinIO/koin/issues/49#issuecomment-414443350
     single { (activity: MainActivity) -> MainRouter(activity) }
-    viewModel { HomeViewModel(get()) }
+    viewModel { HomeViewModel(get(), get()) }
     viewModel { ChatViewModel(get()) }
 }
 val domainModule = module {
-    single { HomeInteractor() }
+    single { HomeInteractor(get()) }
     single { ChatInteractor(get()) }
 }
 val repositoryModule = module {
