@@ -8,6 +8,7 @@ import com.vitaliimalone.a10secondschat.data.mappers.MessageEntityMapper
 import com.vitaliimalone.a10secondschat.data.notifications.Notificator
 import com.vitaliimalone.a10secondschat.data.repository.ChatRepository
 import com.vitaliimalone.a10secondschat.domain.models.Chat
+import com.vitaliimalone.a10secondschat.presentation.utils.getRandomString
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
 
@@ -23,7 +24,7 @@ class GenerateResponseWorker(
 
     override fun doWork(): Result {
         val chatId = inputData.getString(CHAT_ID) ?: return Result.failure()
-        val message = Chat.Message(text = "Generate text", type = Chat.Message.MessageType.RECEIVED)
+        val message = Chat.Message(text = getRandomString(), type = Chat.Message.MessageType.RECEIVED)
         val messageEntity = MessageEntityMapper.map(message, chatId)
         val throwable = chatRepository.saveMessage(messageEntity).blockingGet()
         if (throwable != null) {
