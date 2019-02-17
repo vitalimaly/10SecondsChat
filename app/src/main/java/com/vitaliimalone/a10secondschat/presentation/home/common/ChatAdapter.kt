@@ -3,6 +3,7 @@ package com.vitaliimalone.a10secondschat.presentation.home.common
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.vitaliimalone.a10secondschat.R
 import com.vitaliimalone.a10secondschat.databinding.ListItemChatBinding
@@ -15,8 +16,8 @@ class ChatAdapter(
 ) : RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
     var list: List<Chat> = emptyList()
         set(value) {
+            DiffUtil.calculateDiff(ChatDiffUtilCallback(field, value)).dispatchUpdatesTo(this)
             field = value
-            notifyDataSetChanged()
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
