@@ -3,4 +3,6 @@
     <string name="dialog_create">Create</string>
     <string name="dialog_title">Create new chat</string>
     <string name="dialog_hint">Chat title</string>
+    <string name="notification_channel_description">Notifications from Chat</string>
+    <string name="notification_default_title">New message</string>
 </resources>

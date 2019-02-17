@@ -1,6 +1,7 @@
 package com.vitaliimalone.a10secondschat.di
 
 import androidx.room.Room
+import com.vitaliimalone.a10secondschat.data.notifications.Notificator
 import com.vitaliimalone.a10secondschat.data.repository.ChatRepository
 import com.vitaliimalone.a10secondschat.data.repository.local.ChatLocalDataSource
 import com.vitaliimalone.a10secondschat.data.repository.local.database.ChatDatabase
@@ -24,8 +25,9 @@ val domainModule = module {
     single { HomeInteractor(get()) }
     single { ChatInteractor(get()) }
 }
-val repositoryModule = module {
+val data = module {
     single { ChatRepository(get()) }
+    single { Notificator(androidContext()) }
 }
 val localDataSourceModule = module {
     single { ChatLocalDataSource(get()) }
@@ -36,4 +38,4 @@ val localDataSourceModule = module {
                 .build()
     }
 }
-val appModule = listOf(localDataSourceModule, repositoryModule, domainModule, presentationModule)
+val appModule = listOf(localDataSourceModule, data, domainModule, presentationModule)
