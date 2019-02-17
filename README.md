@@ -6,7 +6,5 @@ LiveData, Room, ViewModel, WorkManager), RxKotlin, Koin.
 
 Screenshots:
 
-<img src="screenshots/menu.png" width="30%" />
-<img src="screenshots/dialog_new_chat.png" width="30%" />
-<img src="screenshots/chat.png" width="30%" />
-<img src="screenshots/notifications.png" width="30%" />
+<img src="screenshots/menu.png" width="30%" /> <img src="screenshots/dialog_new_chat.png" width="30%" />
+<img src="screenshots/chat.png" width="30%" /> <img src="screenshots/notifications.png" width="30%" />
