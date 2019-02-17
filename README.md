@@ -1,8 +1,8 @@
 # 10 Seconds Chat
 An offline chat app which generates random answer in 10 seconds after 
-you write a message. Uses Clean Architecture with MVVM in presentation 
-layer, Android Architecture Components (Data Binding, Lifecycles, 
-LiveData, Room, ViewModel, WorkManager), RxKotlin, Koin.
+you write a message. Uses Clean Architecture, MVVM, Android Architecture 
+Components (Data Binding, Lifecycles, LiveData, Room, ViewModel, 
+WorkManager), RxKotlin, Koin.
 
 Screenshots:
 
