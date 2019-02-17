@@ -1,6 +1,7 @@
 package com.vitaliimalone.a10secondschat.data.repository.local.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -25,4 +26,7 @@ interface ChatDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveMessage(message: MessageEntity): Completable
+
+    @Delete
+    fun deleteChat(chat: ChatEntity): Completable
 }

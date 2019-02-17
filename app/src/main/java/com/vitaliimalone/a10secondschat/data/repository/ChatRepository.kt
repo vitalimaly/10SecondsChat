@@ -25,4 +25,8 @@ class ChatRepository(
     fun saveMessage(message: MessageEntity): Completable {
         return chatLocalDataSource.saveMessage(message)
     }
+
+    fun deleteChat(chat: ChatEntity): Completable {
+        return chatLocalDataSource.deleteChat(chat)
+    }
 }

@@ -18,13 +18,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
         android:onClick="@{() -> viewModel.onChatClick(item)}"
-        android:padding="@dimen/large_spacing">
+        android:onLongClick="@{() -> viewModel.onChatLongClick(item)}">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/chatTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="@dimen/large_spacing"
             android:singleLine="true"
             android:text="@{item.title}"
             android:textColor="@color/text_color_default"

@@ -41,11 +41,11 @@ class ChatFragment : BaseFragment<ChatFragmentBinding>(R.layout.chat_fragment) {
 
     private fun setupObservers() {
         viewModel.apply {
-            chat.observe(this@ChatFragment, Observer {
+            chat.observe(viewLifecycleOwner, Observer {
                 binding.chat = it
                 messagesAdapter.messages = it.messages
             })
-            clearEditText.observe(this@ChatFragment, Observer {
+            clearEditText.observe(viewLifecycleOwner, Observer {
                 binding.chatBoxEditText.text?.clear()
             })
         }

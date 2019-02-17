@@ -6,13 +6,14 @@ import com.vitaliimalone.a10secondschat.domain.interactors.ChatInteractor
 import com.vitaliimalone.a10secondschat.domain.models.Chat
 import com.vitaliimalone.a10secondschat.presentation.MainRouter
 import com.vitaliimalone.a10secondschat.presentation.base.BaseViewModel
+import com.vitaliimalone.a10secondschat.presentation.utils.SingleLiveEvent
 
 class ChatViewModel(
         private val mainRouter: MainRouter,
         private val chatInteractor: ChatInteractor
 ) : BaseViewModel() {
     val chat by lazy { MutableLiveData<Chat>() }
-    val clearEditText by lazy { MutableLiveData<Unit>() }
+    val clearEditText by lazy { SingleLiveEvent<Unit>() }
 
     fun getChat(chatId: String) {
         autoDispose(chatInteractor.getChat(chatId)

@@ -6,12 +6,14 @@ import com.vitaliimalone.a10secondschat.domain.interactors.HomeInteractor
 import com.vitaliimalone.a10secondschat.domain.models.Chat
 import com.vitaliimalone.a10secondschat.presentation.MainRouter
 import com.vitaliimalone.a10secondschat.presentation.base.BaseViewModel
+import com.vitaliimalone.a10secondschat.presentation.utils.SingleLiveEvent
 
 class HomeViewModel(
         private val mainRouter: MainRouter,
         private val homeInteractor: HomeInteractor
 ) : BaseViewModel() {
-    val showDialog by lazy { MutableLiveData<Boolean>() }
+    val showCreateNewChatDialog by lazy { SingleLiveEvent<Boolean>() }
+    val showDeleteChatDialog by lazy { SingleLiveEvent<Chat>() }
     val allChats by lazy { MutableLiveData<List<Chat>>() }
 
     init {
@@ -28,11 +30,11 @@ class HomeViewModel(
     }
 
     fun onFabClick() {
-        showDialog.value = true
+        showCreateNewChatDialog.value = true
     }
 
     fun onCancelDialogClick() {
-        showDialog.value = false
+        showCreateNewChatDialog.value = false
     }
 
     fun onCreateDialogClick(title: String) {
@@ -40,7 +42,7 @@ class HomeViewModel(
         val chat = Chat(title = title)
         autoDispose(homeInteractor.saveChat(chat)
                 .subscribe({
-                    showDialog.value = false
+                    showCreateNewChatDialog.value = false
                     mainRouter.navigateToChat(chat.id)
                 }, {
                     Log.e(HomeViewModel::class.java.simpleName, it.message, it)
@@ -49,5 +51,18 @@ class HomeViewModel(
 
     fun onChatClick(chat: Chat) {
         mainRouter.navigateToChat(chat.id)
+    }
+
+    fun onChatLongClick(chat: Chat): Boolean {
+        showDeleteChatDialog.value = chat
+        return true
+    }
+
+    fun deleteChat(chat: Chat) {
+        autoDispose(homeInteractor.deleteChat(chat)
+                .subscribe({
+                }, {
+                    Log.e(HomeViewModel::class.java.simpleName, it.message, it)
+                }))
     }
 }

@@ -25,4 +25,8 @@ class ChatLocalDataSource(
     fun saveMessage(message: MessageEntity): Completable {
         return chatDao.saveMessage(message)
     }
+
+    fun deleteChat(chat: ChatEntity): Completable {
+        return chatDao.deleteChat(chat)
+    }
 }

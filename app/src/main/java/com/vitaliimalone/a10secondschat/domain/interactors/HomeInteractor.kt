@@ -21,4 +21,9 @@ class HomeInteractor(
         return chatRepository.saveChat(ChatEntityMapper.map(chat))
                 .applyIoSchedulers()
     }
+
+    fun deleteChat(chat: Chat): Completable {
+        return chatRepository.deleteChat(ChatEntityMapper.map(chat))
+                .applyIoSchedulers()
+    }
 }
