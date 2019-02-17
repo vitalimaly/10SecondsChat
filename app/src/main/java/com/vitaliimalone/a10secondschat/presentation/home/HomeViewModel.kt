@@ -38,8 +38,9 @@ class HomeViewModel(
     }
 
     fun onCreateDialogClick(title: String) {
-        // todo add empty check
-        val chat = Chat(title = title)
+        val trimmedTitle = title.trim()
+        if (trimmedTitle.isEmpty()) return
+        val chat = Chat(title = trimmedTitle)
         autoDispose(homeInteractor.saveChat(chat)
                 .subscribe({
                     showCreateNewChatDialog.value = false

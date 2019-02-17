@@ -25,7 +25,9 @@ class ChatViewModel(
     }
 
     fun onSendMessageClick(text: String, chatId: String) {
-        val message = Chat.Message(text = text, type = Chat.Message.MessageType.SENT)
+        val trimmedText = text.trim()
+        if (trimmedText.isEmpty()) return
+        val message = Chat.Message(text = trimmedText, type = Chat.Message.MessageType.SENT)
         autoDispose(chatInteractor.saveMessage(message, chatId)
                 .subscribe({
                     clearEditText.value = Unit
