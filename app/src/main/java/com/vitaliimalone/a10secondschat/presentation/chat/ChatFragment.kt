@@ -34,6 +34,7 @@ class ChatFragment : BaseFragment<ChatFragmentBinding>(R.layout.chat_fragment) {
             val layoutManager = LinearLayoutManager(requireContext())
             layoutManager.stackFromEnd = true
             messagesRecyclerView.layoutManager = layoutManager
+            toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
         }
         setupObservers()
     }
