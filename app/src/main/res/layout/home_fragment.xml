@@ -26,7 +26,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimaryDark"
-                android:text="@string/app_name"
                 app:title="@string/app_name"
                 app:titleTextColor="@color/text_color_default" />
         </com.google.android.material.appbar.AppBarLayout>

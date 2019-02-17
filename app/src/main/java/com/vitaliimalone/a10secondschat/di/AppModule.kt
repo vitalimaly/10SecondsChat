@@ -18,7 +18,7 @@ val presentationModule = module {
     // https://github.com/InsertKoinIO/koin/issues/49#issuecomment-414443350
     single { (activity: MainActivity) -> MainRouter(activity) }
     viewModel { HomeViewModel(get(), get()) }
-    viewModel { ChatViewModel(get()) }
+    viewModel { ChatViewModel(get(), get()) }
 }
 val domainModule = module {
     single { HomeInteractor(get()) }
@@ -36,5 +36,4 @@ val localDataSourceModule = module {
                 .build()
     }
 }
-
 val appModule = listOf(localDataSourceModule, repositoryModule, domainModule, presentationModule)

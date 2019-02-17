@@ -9,10 +9,10 @@ data class Chat(
 ) {
     data class Message(
             val id: String = UUID.randomUUID().toString(),
-            var time: Long,
+            var time: Long = System.currentTimeMillis(),
             var text: String,
             var type: MessageType
     ) {
-        enum class MessageType { MY, RESPONSE }
+        enum class MessageType { SENT, RECEIVED }
     }
 }

@@ -18,6 +18,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{() -> viewModel.onChatClick(item)}"
         android:padding="@dimen/large_spacing">
 
         <androidx.appcompat.widget.AppCompatTextView

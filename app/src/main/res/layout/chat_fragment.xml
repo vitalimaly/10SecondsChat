@@ -1,14 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.vitaliimalone.a10secondschat.presentation.chat.ChatViewModel" />
+
+        <variable
+            name="chat"
+            type="com.vitaliimalone.a10secondschat.domain.models.Chat" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".presentation.chat.ChatFragment">
+        android:layout_height="match_parent">
 
-    <TextView
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello"/>
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                app:title="@{chat.title}"
+                app:titleTextColor="@color/text_color_default"
+                tools:title="@string/app_name" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/messagesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toTopOf="@id/chatBoxEditText"
+            app:layout_constraintTop_toBottomOf="@id/appbar"
+            tools:listitem="@layout/list_item_message_sent" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/chatBoxEditText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/chat_box_color"
+            android:padding="@dimen/small_spacing"
+            android:paddingEnd="@dimen/chat_box_padding_end"
+            android:textColor="@color/text_color_default"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/sendImageView"
+            tools:ignore="RtlSymmetry"
+            tools:text="@tools:sample/lorem" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/sendImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onSendMessageClick(chatBoxEditText.getText().toString(), chat.id)}"
+            android:padding="@dimen/chat_send_icon_padding"
+            android:src="@drawable/ic_send"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -7,9 +7,9 @@ import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.extensions.LayoutContainer
 
-abstract class BindingViewHolder<in T, in VIEW_MODEL>(override val containerView: View)
+abstract class BindingViewHolder<in ITEM, in VIEW_MODEL>(override val containerView: View)
     : RecyclerView.ViewHolder(containerView), LayoutContainer {
-    abstract fun bind(item: T, viewModel: VIEW_MODEL)
+    abstract fun bind(item: ITEM, viewModel: VIEW_MODEL)
 
     protected fun getString(@StringRes resId: Int): String? = containerView.context.getString(resId)
 

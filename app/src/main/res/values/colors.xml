@@ -4,8 +4,11 @@
     <color name="colorPrimaryDark">#181818</color>
     <color name="colorAccent">#FF8A65</color>
     <color name="text_color_default">#FFFFFF</color>
-    <color name="text_color_secondary">#6B6B6B</color>
+    <color name="text_color_secondary">#C0C0C0</color>
     <color name="negative_button_red">#EF5350</color>
     <color name="positive_button_green">#66BB6A</color>
     <color name="divider_color">#80FFFFFF</color>
+    <color name="chat_box_color">#39393A</color>
+    <color name="message_received_color">#636363</color>
+    <color name="message_sent_color">#9B695A</color>
 </resources>

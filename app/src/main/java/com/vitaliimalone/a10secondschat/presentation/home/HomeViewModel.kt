@@ -36,11 +36,18 @@ class HomeViewModel(
     }
 
     fun onCreateDialogClick(title: String) {
-        autoDispose(homeInteractor.saveChat(Chat(title = title))
+        // todo add empty check
+        val chat = Chat(title = title)
+        autoDispose(homeInteractor.saveChat(chat)
                 .subscribe({
                     showDialog.value = false
+                    mainRouter.navigateToChat(chat.id)
                 }, {
                     Log.e(HomeViewModel::class.java.simpleName, it.message, it)
                 }))
+    }
+
+    fun onChatClick(chat: Chat) {
+        mainRouter.navigateToChat(chat.id)
     }
 }
